@@ -11,6 +11,7 @@
                         <th scope="col">Name</th>
                         <th scope="col">Email</th>
                         <th scope="col">Profile Pic</th>
+                        <th scope="col">Approved Status</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -21,9 +22,19 @@
                         <td>{{$i->name}}</td>
                         <td>{{$i->email}}</td>
                         <td><img src="{{asset($i->profile_picture)}}" alt="" width="75" height="75"></td>
+                        @if($i->is_approved==0)
+                        <td><span class="text-danger">Not Approve</span></td>
+                        @endif
+                        @if($i->is_approved==1)
+                        <td><span class="text-success">Approved</span></td>
+                        @endif
                         <td>
-                            <a href="{{url('/student-edit/'.$i->id)}}" class="btn btn-sm btn-warning">Edit</a>
-                            <a href="{{url('/student-delete/'.$i->id)}}" class="btn btn-sm btn-danger">Delete</a>
+                            @if($i->is_approved==0)
+                            <a href="{{url('/student-approve/'.$i->id)}}" class="btn btn-sm btn-info">Approve</a>
+                            @endif
+                            @if($i->is_approved==1)
+                            <a href="{{url('/student-approve/'.$i->id)}}" class="btn btn-sm btn-info">Not Approve</a>
+                            @endif
                         </td>
                     </tr>
                     @endforeach

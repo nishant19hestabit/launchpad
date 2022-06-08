@@ -45,9 +45,6 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
-        'login_check' => [
-            \App\Http\Middleware\LoginCheck::class,
-        ],
         'prevent' => [
             \App\Http\Middleware\PreventBack::class,
         ],

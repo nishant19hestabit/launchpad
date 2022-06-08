@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,8 +19,8 @@ class LoginController extends Controller
 
     public function login_check(Request $request)
     {
-        $is_check = Auth::attempt(['email' => $request->email, 'password' => $request->password]);
-        if (!$is_check) {
+        $token = Auth::attempt(['email' => $request->email, 'password' => $request->password]);
+        if (!isset($token)) {
             return redirect()->back();
         } else {
             return redirect('/');

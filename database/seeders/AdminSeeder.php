@@ -17,15 +17,15 @@ class AdminSeeder extends Seeder
     public function run()
     {
         User::create([
-            'name' => 'admin',
-            'email' => 'admin@admin.com',
+            'name' => 'Nishant',
+            'email' => 'nishant@admin.com',
             'password' => Hash::make(12345678),
-            'address'=>Str::random(10),
+            'address'=>null,
             'profile_picture'=>null,
-            'current_school'=>Str::random(6).' '.'public school',
-            'previous_school'=>Str::random(6).' '.'public school',
+            'current_school'=>null,
+            'previous_school'=>null,
             'role_id'=>1,
-            'teacher_assigned'=>0,
+            'teacher_assigned'=>null,
         ]);
     }
 }
