@@ -65,6 +65,7 @@ class TeacherController extends Controller
                     'experience' => $request->experience,
                     'expertise_subject' => $request->expertise_subject,
                     'role_id' => $role->id,
+                    'is_approved' => 0,
                 ]);
                 if (!$teacher) {
                     $response['message'] = 'Something went wrong during adding teacher';
@@ -92,6 +93,8 @@ class TeacherController extends Controller
 
         try {
             $teacher = JWTAuth::user();
+            $role=Roles::where('id',$teacher->role_id)->first();
+            $teacher['role']=$role->name;
             unset($teacher['teacher_assigned']);
             unset($teacher['father_name']);
             unset($teacher['mother_name']);
@@ -114,7 +117,6 @@ class TeacherController extends Controller
         try {
             $validator = Validator::make($request->all(), [
                 'name' => 'required|string|max:255',
-                'email' => 'required|string|email|max:255|unique:users',
                 'address' => 'required',
                 'experience' => 'required|numeric',
                 'expertise_subject' => 'required|string|max:255',
@@ -143,7 +145,6 @@ class TeacherController extends Controller
                 }
 
                 $user->name = $request->name;
-                $user->email = $request->email;
                 $user->address = $request->address;
                 if ($request->current_school) {
                     $user->current_school = $request->current_school;

@@ -12,4 +12,9 @@ class Roles extends Model
     public $timestamps = false;
     protected $primaryKey = 'id';
     protected $fillable = ['name',];
+
+    public function user()
+    {
+        return $this->hasMany('App\User');
+    }
 }

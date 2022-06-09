@@ -13,7 +13,7 @@ Route::post('/student-login', [StudentController::class, 'student_login']);
 
 Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('/student-detail', [StudentController::class, 'student_detail']);
-    Route::put('/student-update', [StudentController::class, 'student_update']);
+    Route::post('/student-update', [StudentController::class, 'student_update']);
     Route::delete('/student-delete', [StudentController::class, 'student_delete']);
 });
 
@@ -25,7 +25,7 @@ Route::post('/teacher-add', [TeacherController::class, 'teacher_add']);
 
 Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('/teacher-detail', [TeacherController::class, 'teacher_detail']);
-    Route::put('/teacher-update', [TeacherController::class, 'teacher_update']);
+    Route::post('/teacher-update', [TeacherController::class, 'teacher_update']);
     Route::delete('/teacher-delete', [TeacherController::class, 'teacher_delete']);
 });
 
@@ -36,3 +36,4 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('/assign-teacher', [AdminController::class, 'assign']);
     Route::get('/account-approve/{id}', [AdminController::class, 'account_approve']);
 });
+

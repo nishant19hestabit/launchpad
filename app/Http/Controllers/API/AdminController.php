@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Mail\UserApproveMail;
 use App\Models\Roles;
 use App\Models\User;
+use App\Notifications\AssignTeacherNotification;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -54,7 +58,9 @@ class AdminController extends Controller
 
             //catch exception
             catch (Exception $e) {
+                $response['status'] = false;
                 $response['message'] = $e->getMessage();
+                $response['data'] = '';
                 return Response::json($response);
             }
         }
@@ -114,11 +120,14 @@ class AdminController extends Controller
             $response['status'] = true;
             $response['message'] = 'Teacher Assigned successfully';
             $response['data'] = $student;
+            Notification::send($teacher, new AssignTeacherNotification($student));
             return Response::json($response);
         }
         //catch exception
         catch (Exception $e) {
+            $response['status'] = false;
             $response['message'] = $e->getMessage();
+            $response['data'] = '';
             return Response::json($response);
         }
     }
@@ -147,11 +156,16 @@ class AdminController extends Controller
                 $response['status'] = true;
                 $response['message'] = 'Approved successfully';
                 $response['data'] = $user;
+                $details['title'] = 'Approved';
+                $details['name'] = $user->name;
+                $details['message'] = 'Your account has been approved';
+                Mail::to($user->email)->send(new \App\Mail\UserApproveMail($details));
                 return Response::json($response);
             }
         } catch (Exception $e) {
+            $response['status'] = false;
             $response['message'] = $e->getMessage();
-
+            $response['data'] = '';
             return Response::json($response);
         }
     }

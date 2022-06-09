@@ -19,7 +19,7 @@ class User extends Authenticatable implements JWTSubject
     protected $fillable = [
         'name', 'email', 'password', 'address', 'profile_picture',
         'current_school', 'previous_school', 'role_id', 'teacher_assigned', 'experience', 'expertise_subject',
-        'father_name', 'mother_name','is_approved'
+        'father_name', 'mother_name', 'is_approved'
     ];
 
     protected $hidden = ['password'];
@@ -32,5 +32,10 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function role()
+    {
+        return $this->belongsTo('App\Role');
     }
 }

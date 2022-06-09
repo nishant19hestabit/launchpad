@@ -71,6 +71,7 @@ class StudentController extends Controller
                     'father_name' => $request->father_name,
                     'mother_name' => $request->mother_name,
                     'role_id' => $role->id,
+                    'is_approved' => 0,
                 ]);
                 if (!$student) {
                     $response['message'] = 'something went wrong during adding student';
@@ -96,6 +97,8 @@ class StudentController extends Controller
         $response = ['status' => false, 'message' => '', 'data' => ''];
         try {
             $student = JWTAuth::user();
+            $role=Roles::where('id',$student->role_id)->first();
+            $student['role']=$role->name;
             unset($student['experience']);
             unset($student['expertise_subject']);
             $response['status'] = true;
@@ -117,7 +120,6 @@ class StudentController extends Controller
 
             $validator = Validator::make($request->all(), [
                 'name' => 'required|string|max:255',
-                'email' => 'required|string|email|max:255|unique:users',
                 'address' => 'required',
                 'current_school' => 'required|string|max:255',
                 'previous_school' => 'required|string|max:255',
@@ -148,7 +150,6 @@ class StudentController extends Controller
                 }
 
                 $user->name = $request->name;
-                $user->email = $request->email;
                 $user->address = $request->address;
                 $user->current_school = $request->current_school;
                 $user->previous_school = $request->previous_school;
