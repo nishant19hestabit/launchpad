@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -15,4 +16,8 @@ Route::group(['middleware' => ['auth:web','prevent']], function () {
     Route::get('/student-list', [StudentController::class, 'student_list']);
     Route::get('/student-approve/{id}', [StudentController::class, 'student_approve']);
     
+
+    Route::get('/teacher-list', [TeacherController::class, 'teacher_list']);
+    Route::get('/teacher-approve/{id}', [TeacherController::class, 'teacher_approve']);
+
 });

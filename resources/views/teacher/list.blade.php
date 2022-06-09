@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<h1 class="bg-info text-center">Student List</h1>
+<h1 class="bg-info text-center">Teacher List</h1>
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
@@ -16,7 +16,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($students as $i)
+                    @foreach($teachers as $i)
                     <tr>
                         <th scope="row">{{$loop->iteration}}</th>
                         <td>{{$i->name}}</td>
@@ -30,16 +30,19 @@
                         @endif
                         <td>
                             @if($i->is_approved==0)
-                            <a href="{{url('/student-approve/'.$i->id)}}" class="btn btn-sm btn-info">Approve</a>
+                            <a href="{{url('/teacher-approve/'.$i->id)}}" class="btn btn-sm btn-info">Approve</a>
                             @endif
                             @if($i->is_approved==1)
-                            <a href="{{url('/student-approve/'.$i->id)}}" class="btn btn-sm btn-info">Not Approve</a>
+                            <a href="{{url('/teacher-approve/'.$i->id)}}" class="btn btn-sm btn-info">Not Approve</a>
                             @endif
                         </td>
                     </tr>
                     @endforeach
+
                 </tbody>
             </table>
+
+
         </div>
     </div>
 </div>

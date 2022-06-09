@@ -12,12 +12,12 @@
     <title>Login Page!</title>
 </head>
 
-<body>
+<body class="bg-info">
     <div class="container">
-        <div class="row" style="margin-top:10%;">
+        <div class="row" style="margin-top:15%;">
             <div class="col-lg-4"></div>
             <div class="col-lg-4">
-                <h3 class="text-center">Login Here!</h3>
+                <h3 class="text-center text-white">Login Here!</h3>
                 <form action="{{url('/login-check')}}" method="POST">
                     @csrf
                     <div class="form-group">
@@ -29,7 +29,7 @@
                         <input type="password" class="form-control" name="password" required>
                     </div>
                     <div class="form-group text-center">
-                        <button type="submit" class="btn btn-primary">Login</button>
+                        <button type="submit" class="btn btn-dark">Login</button>
                     </div>
                 </form>
             </div>

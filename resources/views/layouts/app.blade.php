@@ -47,12 +47,12 @@
                 <!-- Navbar Search -->
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-bell"></i>
+                        <i class="fas fa-user"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <div class="dropdown-divider"></div>
                         <a href="{{url('/logout')}}" class="dropdown-item">
-                            <i class="fas fa-envelope mr-2"></i> Logout
+                            <i class="fas fa-sign-out-alt mr-2"></i> Logout
                         </a>
                     </div>
                 </li>
@@ -80,10 +80,26 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
                         <li class="nav-item">
+                            <a href="{{url('/')}}" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Dashboard
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{url('/student-list')}}" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     Students
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{url('/teacher-list')}}" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Teachers
                                 </p>
                             </a>
                         </li>
