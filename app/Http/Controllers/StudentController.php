@@ -14,7 +14,17 @@ class StudentController extends Controller
             ->where('roles.name', 'student')
             ->select('users.*')
             ->get();
-        return view('student.list', compact('students'));
+        $student_array = array();
+        foreach ($students as $i) {
+            $data = User::join('roles', 'roles.id', 'users.role_id')
+                ->where('roles.name', 'teacher')
+                ->where('users.id', $i->teacher_assigned)
+                ->select('users.name')
+                ->first();
+            $i['teacher'] = $data ? $data->name : null;
+            array_push($student_array, $i);
+        }
+        return view('student.list', compact('student_array'));
     }
     public function student_approve(Request $request)
     {

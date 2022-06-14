@@ -11,17 +11,19 @@
                         <th scope="col">Name</th>
                         <th scope="col">Email</th>
                         <th scope="col">Profile Pic</th>
+                        <th scope="col">Assigned Teacher</th>
                         <th scope="col">Approved Status</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($students as $i)
+                    @foreach($student_array as $i)
                     <tr>
                         <th scope="row">{{$loop->iteration}}</th>
                         <td>{{$i->name}}</td>
                         <td>{{$i->email}}</td>
                         <td><img src="{{asset($i->profile_picture)}}" alt="" width="75" height="75"></td>
+                        <td>{{$i['teacher']?$i['teacher']:'Not Assigned'}}</td>
                         @if($i->is_approved==0)
                         <td><span class="text-danger">Not Approve</span></td>
                         @endif

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Events\RealTimeMessage;
 use App\Http\Controllers\Controller;
 use App\Mail\UserApproveMail;
 use App\Models\Roles;
@@ -120,7 +121,12 @@ class AdminController extends Controller
             $response['status'] = true;
             $response['message'] = 'Teacher Assigned successfully';
             $response['data'] = $student;
+
+            //send notication email
             Notification::send($teacher, new AssignTeacherNotification($student));
+
+            //send reltime notication message
+            event(new RealTimeMessage($teacher->name . '(teacher) has Assigned to ' . $student->name));
             return Response::json($response);
         }
         //catch exception
@@ -159,7 +165,12 @@ class AdminController extends Controller
                 $details['title'] = 'Approved';
                 $details['name'] = $user->name;
                 $details['message'] = 'Your account has been approved';
+
+                //send notication email
                 Mail::to($user->email)->send(new \App\Mail\UserApproveMail($details));
+
+                //send reltime notication message
+                event(new RealTimeMessage($user->name . ' account has been Approved'));
                 return Response::json($response);
             }
         } catch (Exception $e) {

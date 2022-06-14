@@ -9,15 +9,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/login-check', [LoginController::class, 'login_check']);
 
-Route::group(['middleware' => ['auth:web','prevent']], function () {
+Route::group(['middleware' => ['auth:web', 'prevent']], function () {
     Route::get('/', [LoginController::class, 'dashboard']);
     Route::get('/logout', [LoginController::class, 'logout']);
 
     Route::get('/student-list', [StudentController::class, 'student_list']);
     Route::get('/student-approve/{id}', [StudentController::class, 'student_approve']);
-    
+
 
     Route::get('/teacher-list', [TeacherController::class, 'teacher_list']);
     Route::get('/teacher-approve/{id}', [TeacherController::class, 'teacher_approve']);
-
 });
+
+// Route::get('/welcome', [LoginController::class, 'welcome']);
+Route::get('/send-notification', [LoginController::class, 'send_notification']);
