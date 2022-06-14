@@ -39,13 +39,12 @@ class TeacherController extends Controller
             } else {
                 $image = $request->profile_picture;
                 if ($image) {
-                    $base_url = URL::to('/');
                     $file = $request->profile_picture;
                     $extention = $file->getClientOriginalExtension();
                     $filename = time() . rand(0, 999) . '.' . $extention;
                     $publicPath = public_path('uploads/teachers');
                     $file->move($publicPath, $filename);
-                    $db =  $base_url . '/uploads/teachers/' . $filename;
+                    $db = '/uploads/teachers/' . $filename;
                 } else {
                     $db = null;
                 }
@@ -93,8 +92,8 @@ class TeacherController extends Controller
 
         try {
             $teacher = JWTAuth::user();
-            $role=Roles::where('id',$teacher->role_id)->first();
-            $teacher['role']=$role->name;
+            $role = Roles::where('id', $teacher->role_id)->first();
+            $teacher['role'] = $role->name;
             unset($teacher['teacher_assigned']);
             unset($teacher['father_name']);
             unset($teacher['mother_name']);
@@ -134,13 +133,12 @@ class TeacherController extends Controller
                 $user = User::find($logged_user->id);
                 $image = $request->profile_picture;
                 if ($image) {
-                    $base_url = URL::to('/');
                     $file = $request->profile_picture;
                     $extention = $file->getClientOriginalExtension();
                     $filename = time() . rand(0, 999) . '.' . $extention;
                     $publicPath = public_path('uploads/teachers');
                     $file->move($publicPath, $filename);
-                    $db =  $base_url . '/uploads/teachers/' . $filename;
+                    $db =  '/uploads/teachers/' . $filename;
                     $user->profile_picture = $db;
                 }
 

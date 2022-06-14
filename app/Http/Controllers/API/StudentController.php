@@ -45,13 +45,12 @@ class StudentController extends Controller
             } else {
                 $image = $request->profile_picture;
                 if ($image) {
-                    $base_url = URL::to('/');
                     $file = $request->profile_picture;
                     $extention = $file->getClientOriginalExtension();
                     $filename = time() . rand(0, 999) . '.' . $extention;
                     $publicPath = public_path('uploads/students');
                     $file->move($publicPath, $filename);
-                    $db =  $base_url . '/uploads/students/' . $filename;
+                    $db =  '/uploads/students/' . $filename;
                 } else {
                     $db = null;
                 }
@@ -97,8 +96,8 @@ class StudentController extends Controller
         $response = ['status' => false, 'message' => '', 'data' => ''];
         try {
             $student = JWTAuth::user();
-            $role=Roles::where('id',$student->role_id)->first();
-            $student['role']=$role->name;
+            $role = Roles::where('id', $student->role_id)->first();
+            $student['role'] = $role->name;
             unset($student['experience']);
             unset($student['expertise_subject']);
             $response['status'] = true;
@@ -145,7 +144,7 @@ class StudentController extends Controller
                     $filename = time() . rand(0, 999) . '.' . $extention;
                     $publicPath = public_path('uploads/students');
                     $file->move($publicPath, $filename);
-                    $db =  $base_url . '/uploads/students/' . $filename;
+                    $db =  '/uploads/students/' . $filename;
                     $user->profile_picture = $db;
                 }
 
