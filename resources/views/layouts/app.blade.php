@@ -189,7 +189,7 @@
     <!-- AdminLTE App -->
     <script src="{{asset('assets/dist/js/adminlte.js')}}"></script>
     <!-- AdminLTE for demo purposes -->
-    <script src="{{asset('assets/dist/js/demo.js')}}"></script>
+    <!-- <script src="{{asset('assets/dist/js/demo.js')}}"></script> -->
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="{{asset('assets/dist/js/pages/dashboard.js')}}"></script>
     <script src="https://js.pusher.com/7.1/pusher.min.js"></script>

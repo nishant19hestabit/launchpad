@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <h1 class="bg-info text-center">Teacher List</h1>
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col-lg-12">
             <table class="table">
