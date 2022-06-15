@@ -39,9 +39,9 @@ class LoginController extends Controller
         // event(new RealTimeMessage('hello world!'));
         return view('sendNotification');
     }
-    public function send_notification(Request $request)
-    {
-        event(new RealTimeMessage('hello world!'));
-        echo 'Notification Sent';
-    }
+    // public function send_notification(Request $request)
+    // {
+    //     event(new RealTimeMessage('hello world!'));
+    //     echo 'Notification Sent';
+    // }
 }

@@ -22,4 +22,4 @@ Route::group(['middleware' => ['auth:web', 'prevent']], function () {
 });
 
 // Route::get('/welcome', [LoginController::class, 'welcome']);
-Route::get('/send-notification', [LoginController::class, 'send_notification']);
+// Route::get('/send-notification', [LoginController::class, 'send_notification']);
